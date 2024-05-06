@@ -22,8 +22,8 @@ public class Newton2ndLaw implements ActionListener, ChangeListener{
     simulatorpanel thesimulator = new simulatorpanel();
     homepanel thehome = new homepanel();
     aboutpanel theabout = new aboutpanel();
-    JMenuBar menubar = new JMenuBar();
         //menus
+    JMenuBar menubar = new JMenuBar();
     JMenu SwitchScreen = new JMenu("Menu");
     JMenuItem home = new JMenuItem("Home");
 	JMenuItem simulator = new JMenuItem("Simulator");
@@ -165,7 +165,7 @@ public class Newton2ndLaw implements ActionListener, ChangeListener{
 		massSlider.setMajorTickSpacing(99);
             //color
         start.setBackground(Color.RED);
-        start.setForeground(Color.WHITE);
+        //start.setForeground(Color.WHITE);
         forceSlider.setBackground(Color.WHITE);
         forceSlider.setForeground(Color.BLACK);
         massSlider.setBackground(Color.WHITE);
