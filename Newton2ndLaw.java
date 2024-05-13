@@ -164,7 +164,6 @@ public class Newton2ndLaw implements ActionListener, ChangeListener{
     //Constructor
     public Newton2ndLaw(){
         thepanel.setPreferredSize(new Dimension(960,540));
-        thepanel.setLayout(null);
         thesimulator.setPreferredSize(new Dimension(960,540));
         thesimulator.setLayout(null);
         thehome.setPreferredSize(new Dimension(960,540));
