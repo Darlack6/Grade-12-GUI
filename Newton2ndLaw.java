@@ -1,6 +1,6 @@
 //Program Name: Newton's 2nd Law 
-//Created by: Derek
-//Version number: 0.1
+//Created by: Derek and Kelvin
+//Version number: 0.3
 
 import java.awt.*;
 import javax.swing.*;
