@@ -17,14 +17,30 @@ public class simulatorpanel extends JPanel{
         g.fillRect(0,0, 960, 540);
         g.drawImage(imgBox,intX,100,null);
     }
+    public BufferedImage loadImage(String strFileName){
+        InputStream imageclass = null;
+        imageclass = this.getClass().getResourceAsStream(strFileName);
+        if(imageclass == null){
 
+        }else{
+            try{
+                return ImageIO.read(imageclass);
+            }catch(IOException e){
+                System.out.println("Unable to load file");
+            }
+        }
+        try{
+            System.out.println("loading from file");
+            BufferedImage theimage = ImageIO.read(new File(strFileName));
+            return theimage;
+        }catch(IOException e){
+            System.out.println("Unable to load local image file: \""+strFileName+"\"");
+            return null;
+        }
+    }
     //Constructor
     public simulatorpanel(){
         super();
-        try{
-            imgBox=ImageIO.read(new File("box.png"));
-        }catch(IOException e){
-            System.out.println("Unable to load file");
-        }
+        imgBox = loadImage("box.png");
     }
 }

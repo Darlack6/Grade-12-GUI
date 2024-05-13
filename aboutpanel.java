@@ -14,14 +14,30 @@ public class aboutpanel extends JPanel{
         //background
         g.drawImage(imgAbout,0,0,null);
     }
+    public BufferedImage loadImage(String strFileName){
+        InputStream imageclass = null;
+        imageclass = this.getClass().getResourceAsStream(strFileName);
+        if(imageclass == null){
 
+        }else{
+            try{
+                return ImageIO.read(imageclass);
+            }catch(IOException e){
+                System.out.println("Unable to load file");
+            }
+        }
+        try{
+            System.out.println("loading from file");
+            BufferedImage theimage = ImageIO.read(new File(strFileName));
+            return theimage;
+        }catch(IOException e){
+            System.out.println("Unable to load local image file: \""+strFileName+"\"");
+            return null;
+        }
+    }
     //Constructor
     public aboutpanel(){
         super();
-        try{
-            imgAbout=ImageIO.read(new File("about.png"));
-        }catch(IOException e){
-            System.out.println("Unable to load file");
-        }
+        imgAbout = loadImage("about.png");
     }
 }
