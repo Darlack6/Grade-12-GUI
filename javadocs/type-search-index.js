@@ -1,1 +1,1 @@
-typeSearchIndex = [{"p":"<Unnamed>","l":"aboutpanel"},{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"<Unnamed>","l":"homepanel"},{"p":"<Unnamed>","l":"Newton2ndLaw"},{"p":"<Unnamed>","l":"simulatorpanel"}];updateSearchResults();
+typeSearchIndex = [{"p":"<Unnamed>","l":"aboutpanel"},{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"<Unnamed>","l":"helppanel"},{"p":"<Unnamed>","l":"homepanel"},{"p":"<Unnamed>","l":"Newton2ndLaw"},{"p":"<Unnamed>","l":"simulatorpanel"},{"p":"<Unnamed>","l":"testpanel"}];updateSearchResults();
