@@ -192,7 +192,6 @@ public class Newton2ndLaw implements ActionListener, ChangeListener{
         theframe.setJMenuBar(menubar);
 
         //simulator
-
             //sizes
         forceSlider.setSize(230, 50);
         forceLabel.setSize(500,50);
@@ -244,66 +243,66 @@ public class Newton2ndLaw implements ActionListener, ChangeListener{
 
         //test page
             //sizes
-            true1.setSize(170,30);
-            false1.setSize(170,30);
-            true2.setSize(170,30);
-            false2.setSize(170,30);
-            true3.setSize(170,30);
-            false3.setSize(170,30);
-            question4.setSize(170,30);
-            name.setSize(170,25);
-            submit.setSize(90,30);
-            scoreLabel.setSize(230,50);
+        true1.setSize(170,30);
+        false1.setSize(170,30);
+        true2.setSize(170,30);
+        false2.setSize(170,30);
+        true3.setSize(170,30);
+        false3.setSize(170,30);
+        question4.setSize(170,30);
+        name.setSize(170,25);
+        submit.setSize(90,30);
+        scoreLabel.setSize(230,50);
             //fonts
-            true1.setFont(SmallFont);
-            false1.setFont(SmallFont);
-            true2.setFont(SmallFont);
-            false2.setFont(SmallFont);
-            true3.setFont(SmallFont);
-            false3.setFont(SmallFont);
-            question4.setFont(SmallFont);
-            name.setFont(SmallFont);
-            submit.setFont(SmallFont);
-            scoreLabel.setFont(Dfont);
+        true1.setFont(SmallFont);
+        false1.setFont(SmallFont);
+        true2.setFont(SmallFont);
+        false2.setFont(SmallFont);
+        true3.setFont(SmallFont);
+        false3.setFont(SmallFont);
+        question4.setFont(SmallFont);
+        name.setFont(SmallFont);
+        submit.setFont(SmallFont);
+        scoreLabel.setFont(Dfont);
             //locations
-            true1.setLocation(60,90);
-            false1.setLocation(260,90);
-            true2.setLocation(60,180);
-            false2.setLocation(260,180);
-            true3.setLocation(60,300);
-            false3.setLocation(260,300);
-            question4.setLocation(60,420);
-            name.setLocation(120,472);
-            submit.setLocation(825,472);
-            scoreLabel.setLocation(800,60);
+        true1.setLocation(60,90);
+        false1.setLocation(260,90);
+        true2.setLocation(60,180);
+        false2.setLocation(260,180);
+        true3.setLocation(60,300);
+        false3.setLocation(260,300);
+        question4.setLocation(60,420);
+        name.setLocation(120,472);
+        submit.setLocation(825,472);
+        scoreLabel.setLocation(800,60);
             //color
-            true1.setBackground(Color.WHITE);
-            false1.setBackground(Color.WHITE);
-            true2.setBackground(Color.WHITE);
-            false2.setBackground(Color.WHITE);
-            true3.setBackground(Color.WHITE);
-            false3.setBackground(Color.WHITE);
-            submit.setBackground(Color.WHITE);
-            scoreLabel.setBackground(Color.BLACK);
+        true1.setBackground(Color.WHITE);
+        false1.setBackground(Color.WHITE);
+        true2.setBackground(Color.WHITE);
+        false2.setBackground(Color.WHITE);
+        true3.setBackground(Color.WHITE);
+        false3.setBackground(Color.WHITE);
+        submit.setBackground(Color.WHITE);
+        scoreLabel.setBackground(Color.BLACK);
             //adding listenners
-            true1.addActionListener(this);
-            false1.addActionListener(this);
-            true2.addActionListener(this);
-            false2.addActionListener(this);
-            true3.addActionListener(this);
-            false3.addActionListener(this);
-            submit.addActionListener(this);
+        true1.addActionListener(this);
+        false1.addActionListener(this);
+        true2.addActionListener(this);
+        false2.addActionListener(this);
+        true3.addActionListener(this);
+        false3.addActionListener(this);
+        submit.addActionListener(this);
             //adding to panel
-            thetest.add(true1);
-            thetest.add(false1);
-            thetest.add(true2);
-            thetest.add(false2);
-            thetest.add(true3);
-            thetest.add(false3);
-            thetest.add(question4);
-            thetest.add(name);
-            thetest.add(submit);
-            thetest.add(scoreLabel);
+        thetest.add(true1);
+        thetest.add(false1);
+        thetest.add(true2);
+        thetest.add(false2);
+        thetest.add(true3);
+        thetest.add(false3);
+        thetest.add(question4);
+        thetest.add(name);
+        thetest.add(submit);
+        thetest.add(scoreLabel);
 
         theframe.setContentPane(thehome);
 		theframe.pack();
