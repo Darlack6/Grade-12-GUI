@@ -6,8 +6,6 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
 import javax.swing.event.*;
-import javax.imageio.*;
-import java.awt.image.*;
 import java.awt.Font;
 
 public class Newton2ndLaw implements ActionListener, ChangeListener{
@@ -16,12 +14,20 @@ public class Newton2ndLaw implements ActionListener, ChangeListener{
     double dblMass = 50;
     double dblAcceleration = 7.5;
     double dblTime = 0;
-    
+    int intScore = 0;
+    int intQ1 = 0;
+    int intQ2 = 0;
+    int intQ3 = 0;
+    int intQ4 = 0;
+    int intSubmit = 0;
+
     JFrame theframe = new JFrame("Newton's 2nd Law Simulator");
     JPanel thepanel = new JPanel();
     simulatorpanel thesimulator = new simulatorpanel();
     homepanel thehome = new homepanel();
     aboutpanel theabout = new aboutpanel();
+    helppanel thehelp = new helppanel();
+    testpanel thetest = new testpanel();
         //menus
     JMenuBar menubar = new JMenuBar();
     JMenu SwitchScreen = new JMenu("Menu");
@@ -39,8 +45,19 @@ public class Newton2ndLaw implements ActionListener, ChangeListener{
     JLabel massLabel = new JLabel("Mass: "+dblMass+" kg");
     JLabel accelerationLabel = new JLabel("Acceleration: "+dblAcceleration+"m/s^2");
     JLabel timeLabel = new JLabel("Time: "+dblTime+"s");
+    JLabel scoreLabel = new JLabel("Score:");
         //Buttons
     JButton start = new JButton("Start");
+    JButton true1 = new JButton("True");
+    JButton false1 = new JButton("False");
+    JButton true2 = new JButton("True");
+    JButton false2 = new JButton("False");
+    JButton true3 = new JButton("True");
+    JButton false3 = new JButton("False");
+    JButton submit = new JButton("Submit");
+        //textfields
+    JTextField question4 = new JTextField();
+    JTextField name = new JTextField();
         //fonts
     Font Dfont = new Font("Arial",Font.PLAIN,20);
     Font SmallFont = new Font("Arial",Font.PLAIN,15);
@@ -61,11 +78,14 @@ public class Newton2ndLaw implements ActionListener, ChangeListener{
             theframe.setContentPane(theabout);
             theframe.pack();
             theframe.repaint();
-            System.out.println("about");
         }else if(evt.getSource() == help){
-            System.out.println("help");
+            theframe.setContentPane(thehelp);
+            theframe.pack();
+            theframe.repaint();
         }else if(evt.getSource() == test){
-            System.out.println("test");
+            theframe.setContentPane(thetest);
+            theframe.pack();
+            theframe.repaint();
         }else if(evt.getSource() == scores){
             System.out.println("scores");
         }else if(evt.getSource() == start){
@@ -81,6 +101,44 @@ public class Newton2ndLaw implements ActionListener, ChangeListener{
                 dblTime = 0;
                 thesimulator.intX=-300;
                 
+            }
+        }else if(evt.getSource() == true1){
+            true1.setBackground(Color.GREEN);
+            false1.setBackground(Color.WHITE);
+            intQ1=0;
+        }else if(evt.getSource() == false1){
+            false1.setBackground(Color.GREEN);
+            true1.setBackground(Color.WHITE);
+            intQ1=1;
+        }else if(evt.getSource() == true2){
+            true2.setBackground(Color.GREEN);
+            false2.setBackground(Color.WHITE);
+            intQ2=1;
+        }else if(evt.getSource() == false2){
+            false2.setBackground(Color.GREEN);
+            true2.setBackground(Color.WHITE);
+            intQ2=0;
+        }else if(evt.getSource() == true3){
+            true3.setBackground(Color.GREEN);
+            false3.setBackground(Color.WHITE);
+            intQ3=1;
+        }else if(evt.getSource() == false3){
+            false3.setBackground(Color.GREEN);
+            true3.setBackground(Color.WHITE);
+            intQ3=0;
+        }
+        else if(evt.getSource() == submit){
+            if(intSubmit==0){
+                if(question4.getText().equals("0.5")){
+                    intQ4=1;
+                }else{
+                    intQ4=0;
+                }
+                intScore = intQ1+intQ2+intQ3+intQ4;
+                System.out.println(intScore);
+                intScore = (intScore / 4)*100;
+                scoreLabel.setText("Score: "+intScore+"%");
+                intSubmit=1;
             }
         }
     }
@@ -113,6 +171,10 @@ public class Newton2ndLaw implements ActionListener, ChangeListener{
         thehome.setLayout(null);
         theabout.setPreferredSize(new Dimension(960,540));
         theabout.setLayout(null);
+        thehelp.setPreferredSize(new Dimension(960,540));
+        thehelp.setLayout(null);
+        thetest.setPreferredSize(new Dimension(960,540));
+        thetest.setLayout(null);
 
         home.addActionListener(this);
         simulator.addActionListener(this);
@@ -146,7 +208,6 @@ public class Newton2ndLaw implements ActionListener, ChangeListener{
         accelerationLabel.setFont(SmallFont);
         timeLabel.setFont(SmallFont);
         start.setFont(Dfont);
-
             //locations
         forceSlider.setLocation(25,50);
         forceLabel.setLocation(80,0);
@@ -155,7 +216,6 @@ public class Newton2ndLaw implements ActionListener, ChangeListener{
         accelerationLabel.setLocation(775,-10);
         timeLabel.setLocation(775,10);
         start.setLocation(775,60);
-
             //sliders
         forceSlider.setPaintLabels(true);
 		forceSlider.setPaintTicks(true);
@@ -165,7 +225,7 @@ public class Newton2ndLaw implements ActionListener, ChangeListener{
 		massSlider.setMajorTickSpacing(99);
             //color
         start.setBackground(Color.RED);
-        //start.setForeground(Color.WHITE);
+        start.setForeground(Color.WHITE);
         forceSlider.setBackground(Color.WHITE);
         forceSlider.setForeground(Color.BLACK);
         massSlider.setBackground(Color.WHITE);
@@ -174,7 +234,6 @@ public class Newton2ndLaw implements ActionListener, ChangeListener{
         forceSlider.addChangeListener(this);
         massSlider.addChangeListener(this);
         start.addActionListener(this);
-
             //adding to panel
         thesimulator.add(forceSlider);
         thesimulator.add(forceLabel);
@@ -183,6 +242,69 @@ public class Newton2ndLaw implements ActionListener, ChangeListener{
         thesimulator.add(accelerationLabel);
         thesimulator.add(timeLabel);
         thesimulator.add(start);
+
+        //test page
+            //sizes
+            true1.setSize(170,30);
+            false1.setSize(170,30);
+            true2.setSize(170,30);
+            false2.setSize(170,30);
+            true3.setSize(170,30);
+            false3.setSize(170,30);
+            question4.setSize(170,30);
+            name.setSize(170,25);
+            submit.setSize(90,30);
+            scoreLabel.setSize(230,50);
+            //fonts
+            true1.setFont(SmallFont);
+            false1.setFont(SmallFont);
+            true2.setFont(SmallFont);
+            false2.setFont(SmallFont);
+            true3.setFont(SmallFont);
+            false3.setFont(SmallFont);
+            question4.setFont(SmallFont);
+            name.setFont(SmallFont);
+            submit.setFont(SmallFont);
+            scoreLabel.setFont(Dfont);
+            //locations
+            true1.setLocation(60,90);
+            false1.setLocation(260,90);
+            true2.setLocation(60,180);
+            false2.setLocation(260,180);
+            true3.setLocation(60,300);
+            false3.setLocation(260,300);
+            question4.setLocation(60,420);
+            name.setLocation(120,472);
+            submit.setLocation(825,472);
+            scoreLabel.setLocation(800,60);
+            //color
+            true1.setBackground(Color.WHITE);
+            false1.setBackground(Color.WHITE);
+            true2.setBackground(Color.WHITE);
+            false2.setBackground(Color.WHITE);
+            true3.setBackground(Color.WHITE);
+            false3.setBackground(Color.WHITE);
+            submit.setBackground(Color.WHITE);
+            scoreLabel.setBackground(Color.BLACK);
+            //adding listenners
+            true1.addActionListener(this);
+            false1.addActionListener(this);
+            true2.addActionListener(this);
+            false2.addActionListener(this);
+            true3.addActionListener(this);
+            false3.addActionListener(this);
+            submit.addActionListener(this);
+            //adding to panel
+            thetest.add(true1);
+            thetest.add(false1);
+            thetest.add(true2);
+            thetest.add(false2);
+            thetest.add(true3);
+            thetest.add(false3);
+            thetest.add(question4);
+            thetest.add(name);
+            thetest.add(submit);
+            thetest.add(scoreLabel);
 
         theframe.setContentPane(thehome);
 		theframe.pack();
