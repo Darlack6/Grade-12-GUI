@@ -44,7 +44,6 @@ public class Newton2ndLaw implements ActionListener, ChangeListener{
     JLabel accelerationLabel = new JLabel("Acceleration: "+dblAcceleration+"m/s^2");
     JLabel timeLabel = new JLabel("Time: "+dblTime+"s");
     JLabel scoreLabel = new JLabel("Score:");
-    JLabel printScoresLabel = new JLabel();
         /**buttons*/
     JButton start = new JButton("Start");
     JButton true1 = new JButton("True");
@@ -110,30 +109,30 @@ public class Newton2ndLaw implements ActionListener, ChangeListener{
             }
         /**Question 1, sets intQ1 = 1 if false*/
         }else if(evt.getSource() == true1){
-            true1.setBackground(Color.GREEN);
-            false1.setBackground(Color.WHITE);
+            true1.setForeground(Color.BLUE);
+            false1.setForeground(Color.BLACK);
             intQ1=0;
         }else if(evt.getSource() == false1){
-            false1.setBackground(Color.GREEN);
-            true1.setBackground(Color.WHITE);
+            false1.setForeground(Color.BLUE);
+            true1.setForeground(Color.BLACK);
             intQ1=1;
         /**Question 2, sets intQ2 = 1 if true*/
         }else if(evt.getSource() == true2){
-            true2.setBackground(Color.GREEN);
-            false2.setBackground(Color.WHITE);
+            true2.setForeground(Color.BLUE);
+            false2.setForeground(Color.BLACK);
             intQ2=1;
         }else if(evt.getSource() == false2){
-            false2.setBackground(Color.GREEN);
-            true2.setBackground(Color.WHITE);
+            false2.setForeground(Color.BLUE);
+            true2.setForeground(Color.BLACK);
             intQ2=0;
         /**Question 3, sets intQ3 = 1 if true*/
         }else if(evt.getSource() == true3){
-            true3.setBackground(Color.GREEN);
-            false3.setBackground(Color.WHITE);
+            true3.setForeground(Color.BLUE);
+            false3.setForeground(Color.BLACK);
             intQ3=1;
         }else if(evt.getSource() == false3){
-            false3.setBackground(Color.GREEN);
-            true3.setBackground(Color.WHITE);
+            false3.setForeground(Color.BLUE);
+            true3.setForeground(Color.BLACK);
             intQ3=0;
         }
         else if(evt.getSource() == submit){
@@ -185,6 +184,7 @@ public class Newton2ndLaw implements ActionListener, ChangeListener{
     public Newton2ndLaw(){
         /**Initializes panels*/
         thepanel.setPreferredSize(new Dimension(960,540));
+        thepanel.setLayout(null);
         thesimulator.setPreferredSize(new Dimension(960,540));
         thesimulator.setLayout(null);
         thehome.setPreferredSize(new Dimension(960,540));
@@ -241,8 +241,8 @@ public class Newton2ndLaw implements ActionListener, ChangeListener{
 		massSlider.setPaintTicks(true);
 		massSlider.setMajorTickSpacing(99);
             /**color*/
-        start.setBackground(Color.RED);
-        start.setForeground(Color.WHITE);
+        start.setBackground(Color.WHITE);
+        start.setForeground(Color.RED);
         forceSlider.setBackground(Color.WHITE);
         forceSlider.setForeground(Color.BLACK);
         massSlider.setBackground(Color.WHITE);
