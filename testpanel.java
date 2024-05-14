@@ -5,20 +5,19 @@ import javax.imageio.*;
 import java.awt.image.*;
 
 public class testpanel extends JPanel{
-    //Properties
+    /**properties*/
     BufferedImage imgTest = null;
-
-    //Methods
+    /**methods*/
     public void paintComponent(Graphics g){
         super.paintComponent(g);
-        //background
+        /**draws background*/
         g.drawImage(imgTest,0,0,null);
     }
+    /**gets image from jar file, if not found, uses from local file*/
     public BufferedImage loadImage(String strFileName){
         InputStream imageclass = null;
         imageclass = this.getClass().getResourceAsStream(strFileName);
         if(imageclass == null){
-
         }else{
             try{
                 return ImageIO.read(imageclass);
@@ -35,7 +34,7 @@ public class testpanel extends JPanel{
             return null;
         }
     }
-    //Constructor
+    /**constructor*/
     public testpanel(){
         super();
         imgTest = loadImage("test.png");

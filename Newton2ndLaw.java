@@ -1,26 +1,25 @@
-//Program Name: Newton's 2nd Law 
-//Created by: Derek and Kelvin
-//Version number: 0.3
+/** Program Name: Newton's 2nd Law */
+/** Created by: Derek and Kelvin */
+/** Version number: 1.0 */
 
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
 import javax.swing.event.*;
-import java.awt.Font;
 
 public class Newton2ndLaw implements ActionListener, ChangeListener{
-    //properties
+    /**properties*/
     double dblForce = 375;
     double dblMass = 50;
     double dblAcceleration = 7.5;
     double dblTime = 0;
-    int intScore = 0;
+    double dblScore = 0;
     int intQ1 = 0;
     int intQ2 = 0;
     int intQ3 = 0;
     int intQ4 = 0;
     int intSubmit = 0;
-
+        /**frames and panels*/
     JFrame theframe = new JFrame("Newton's 2nd Law Simulator");
     JPanel thepanel = new JPanel();
     simulatorpanel thesimulator = new simulatorpanel();
@@ -28,7 +27,7 @@ public class Newton2ndLaw implements ActionListener, ChangeListener{
     aboutpanel theabout = new aboutpanel();
     helppanel thehelp = new helppanel();
     testpanel thetest = new testpanel();
-        //menus
+        /**menus*/
     JMenuBar menubar = new JMenuBar();
     JMenu SwitchScreen = new JMenu("Menu");
     JMenuItem home = new JMenuItem("Home");
@@ -36,17 +35,17 @@ public class Newton2ndLaw implements ActionListener, ChangeListener{
     JMenuItem about = new JMenuItem("About");
     JMenuItem help = new JMenuItem("Help");
 	JMenuItem test = new JMenuItem("Test");
-	JMenuItem scores = new JMenuItem("Scores");
-        //sliders
+        /**sliders*/
     JSlider forceSlider = new JSlider(250,500);
     JSlider massSlider = new JSlider(1,100);
-        //labels
+        /**labels*/
     JLabel forceLabel = new JLabel("Force: "+dblForce+"N");
     JLabel massLabel = new JLabel("Mass: "+dblMass+" kg");
     JLabel accelerationLabel = new JLabel("Acceleration: "+dblAcceleration+"m/s^2");
     JLabel timeLabel = new JLabel("Time: "+dblTime+"s");
     JLabel scoreLabel = new JLabel("Score:");
-        //Buttons
+    JLabel printScoresLabel = new JLabel();
+        /**buttons*/
     JButton start = new JButton("Start");
     JButton true1 = new JButton("True");
     JButton false1 = new JButton("False");
@@ -55,46 +54,53 @@ public class Newton2ndLaw implements ActionListener, ChangeListener{
     JButton true3 = new JButton("True");
     JButton false3 = new JButton("False");
     JButton submit = new JButton("Submit");
-        //textfields
+        /**text fields*/
     JTextField question4 = new JTextField();
-    JTextField name = new JTextField();
-        //fonts
-    Font Dfont = new Font("Arial",Font.PLAIN,20);
-    Font SmallFont = new Font("Arial",Font.PLAIN,15);
-        //timer
+    JTextField name = new JTextField("");
+        /**fonts*/
+    Font fntAerialLarge = new Font("Arial",Font.PLAIN,20);
+    Font fntAerialSmall = new Font("Arial",Font.PLAIN,15);
+        /**timer*/
     Timer theTimer = new Timer(1000/48,this);
 
-    //Methods
+    /**methods*/
     public void actionPerformed(ActionEvent evt){
+        /**Switches to simulator screen*/
         if(evt.getSource() == simulator){
             theframe.setContentPane(thesimulator);
             theframe.pack();
             theframe.repaint();
+        /**Switches to home  screen*/
         }else if(evt.getSource() == home){
             theframe.setContentPane(thehome);
             theframe.pack();
             theframe.repaint();
+        /**Switches to about screen*/
         }else if(evt.getSource() == about){
             theframe.setContentPane(theabout);
             theframe.pack();
             theframe.repaint();
+        /**Switches to help screen*/
         }else if(evt.getSource() == help){
             theframe.setContentPane(thehelp);
             theframe.pack();
             theframe.repaint();
+        /**Switches to test screen*/
         }else if(evt.getSource() == test){
             theframe.setContentPane(thetest);
             theframe.pack();
             theframe.repaint();
-        }else if(evt.getSource() == scores){
-            System.out.println("scores");
+        /**Starts timer*/
         }else if(evt.getSource() == start){
             theTimer.start();
         }else if(evt.getSource() == theTimer){
             dblTime = dblTime + 1;
+            /**calculates total time elapsed for 25m*/
             double dblTimeOutput = Math.round((dblTime/48.0)*10000.0)/10000.0;
+            /**increases the x value of the box according to the acceleration method calculation*/
             thesimulator.intX=thesimulator.intX+acceleration(dblForce,dblMass,dblTimeOutput);
             theframe.repaint();
+            /**If box moves out of frame, stop the timer, update the time label and reset the position*/
             if(thesimulator.intX>800){
                 timeLabel.setText("Time: "+time(dblForce, dblMass)+"s");
                 theTimer.stop();
@@ -102,6 +108,7 @@ public class Newton2ndLaw implements ActionListener, ChangeListener{
                 thesimulator.intX=-300;
                 
             }
+        /**Question 1, sets intQ1 = 1 if false*/
         }else if(evt.getSource() == true1){
             true1.setBackground(Color.GREEN);
             false1.setBackground(Color.WHITE);
@@ -110,6 +117,7 @@ public class Newton2ndLaw implements ActionListener, ChangeListener{
             false1.setBackground(Color.GREEN);
             true1.setBackground(Color.WHITE);
             intQ1=1;
+        /**Question 2, sets intQ2 = 1 if true*/
         }else if(evt.getSource() == true2){
             true2.setBackground(Color.GREEN);
             false2.setBackground(Color.WHITE);
@@ -118,6 +126,7 @@ public class Newton2ndLaw implements ActionListener, ChangeListener{
             false2.setBackground(Color.GREEN);
             true2.setBackground(Color.WHITE);
             intQ2=0;
+        /**Question 3, sets intQ3 = 1 if true*/
         }else if(evt.getSource() == true3){
             true3.setBackground(Color.GREEN);
             false3.setBackground(Color.WHITE);
@@ -128,21 +137,31 @@ public class Newton2ndLaw implements ActionListener, ChangeListener{
             intQ3=0;
         }
         else if(evt.getSource() == submit){
+            /**If statement that prevents test from being submitted again*/
             if(intSubmit==0){
+                /**Question 4, sets intQ4 = 1 if user inputted 0.5*/
                 if(question4.getText().equals("0.5")){
                     intQ4=1;
                 }else{
                     intQ4=0;
                 }
-                intScore = intQ1+intQ2+intQ3+intQ4;
-                System.out.println(intScore);
-                intScore = (intScore / 4)*100;
-                scoreLabel.setText("Score: "+intScore+"%");
+                /**Sums user's score*/
+                dblScore = intQ1+intQ2+intQ3+intQ4;
+                dblScore = (dblScore / 4)*100;
+                /**If no name is inputted, use "Unknown", else use inputted name*/
+                if(name.getText().equals("")){
+                    scoreLabel.setText("Unknown's Score: "+dblScore+"%");
+                }else{
+                    scoreLabel.setText(name.getText()+"'s Score: "+dblScore+"%");
+                }
+                /**Hides submit button so test cannot be submitted again*/
+                submit.setLocation(1000,540);
                 intSubmit=1;
             }
         }
     }
     public void stateChanged(ChangeEvent evt){
+        /**Force slider, reads adjusted value and adjusts acceleration value*/
         if(evt.getSource() == forceSlider){
             dblForce = forceSlider.getValue();
             forceLabel.setText("Force: "+dblForce+"N");
@@ -151,6 +170,7 @@ public class Newton2ndLaw implements ActionListener, ChangeListener{
             dblAcceleration = Math.round(dblAcceleration);
             dblAcceleration=dblAcceleration/1000;
             accelerationLabel.setText("Acceleration: "+dblAcceleration+" m/s^2");
+        /**Mass slider, reads adjusted value and adjusts acceleration value*/
         }if(evt.getSource() == massSlider){
             dblMass = massSlider.getValue();
             massLabel.setText("Mass: "+dblMass+" kg");
@@ -161,8 +181,9 @@ public class Newton2ndLaw implements ActionListener, ChangeListener{
             accelerationLabel.setText("Acceleration: "+dblAcceleration+" m/s^2");
         }
     }
-    //Constructor
+    /**constructor*/
     public Newton2ndLaw(){
+        /**Initializes panels*/
         thepanel.setPreferredSize(new Dimension(960,540));
         thesimulator.setPreferredSize(new Dimension(960,540));
         thesimulator.setLayout(null);
@@ -174,25 +195,23 @@ public class Newton2ndLaw implements ActionListener, ChangeListener{
         thehelp.setLayout(null);
         thetest.setPreferredSize(new Dimension(960,540));
         thetest.setLayout(null);
-
+        /**adds action listeners to menus*/
         home.addActionListener(this);
         simulator.addActionListener(this);
 		about.addActionListener(this);
 		help.addActionListener(this);
 		test.addActionListener(this);
-		scores.addActionListener(this);
-	
+        /**add menus to SwitchScreen*/
         SwitchScreen.add(home);
 		SwitchScreen.add(simulator);
         SwitchScreen.add(about);
         SwitchScreen.add(help);
         SwitchScreen.add(test);
-        SwitchScreen.add(scores);
         menubar.add(SwitchScreen);
         theframe.setJMenuBar(menubar);
 
-        //simulator
-            //sizes
+        /**simulator*/
+            /**sizes*/
         forceSlider.setSize(230, 50);
         forceLabel.setSize(500,50);
         massSlider.setSize(230,50);
@@ -200,13 +219,13 @@ public class Newton2ndLaw implements ActionListener, ChangeListener{
         accelerationLabel.setSize(500,60);
         timeLabel.setSize(500,60);
         start.setSize(170,30);
-            //fonts
-        forceLabel.setFont(Dfont);
-        massLabel.setFont(Dfont);
-        accelerationLabel.setFont(SmallFont);
-        timeLabel.setFont(SmallFont);
-        start.setFont(Dfont);
-            //locations
+            /**fonts*/
+        forceLabel.setFont(fntAerialLarge);
+        massLabel.setFont(fntAerialLarge);
+        accelerationLabel.setFont(fntAerialSmall);
+        timeLabel.setFont(fntAerialSmall);
+        start.setFont(fntAerialLarge);
+            /**locations*/
         forceSlider.setLocation(25,50);
         forceLabel.setLocation(80,0);
         massSlider.setLocation(300,50);
@@ -214,25 +233,25 @@ public class Newton2ndLaw implements ActionListener, ChangeListener{
         accelerationLabel.setLocation(775,-10);
         timeLabel.setLocation(775,10);
         start.setLocation(775,60);
-            //sliders
+            /**sliders*/
         forceSlider.setPaintLabels(true);
 		forceSlider.setPaintTicks(true);
 		forceSlider.setMajorTickSpacing(250);
         massSlider.setPaintLabels(true);
 		massSlider.setPaintTicks(true);
 		massSlider.setMajorTickSpacing(99);
-            //color
+            /**color*/
         start.setBackground(Color.RED);
         start.setForeground(Color.WHITE);
         forceSlider.setBackground(Color.WHITE);
         forceSlider.setForeground(Color.BLACK);
         massSlider.setBackground(Color.WHITE);
         massSlider.setForeground(Color.BLACK);
-            //adding listenners
+            /**adding Listeners*/
         forceSlider.addChangeListener(this);
         massSlider.addChangeListener(this);
         start.addActionListener(this);
-            //adding to panel
+            /**add to the simulator panel*/
         thesimulator.add(forceSlider);
         thesimulator.add(forceLabel);
         thesimulator.add(massSlider);
@@ -241,8 +260,8 @@ public class Newton2ndLaw implements ActionListener, ChangeListener{
         thesimulator.add(timeLabel);
         thesimulator.add(start);
 
-        //test page
-            //sizes
+        /**test page*/
+            /**sizes*/
         true1.setSize(170,30);
         false1.setSize(170,30);
         true2.setSize(170,30);
@@ -253,18 +272,18 @@ public class Newton2ndLaw implements ActionListener, ChangeListener{
         name.setSize(170,25);
         submit.setSize(90,30);
         scoreLabel.setSize(230,50);
-            //fonts
-        true1.setFont(SmallFont);
-        false1.setFont(SmallFont);
-        true2.setFont(SmallFont);
-        false2.setFont(SmallFont);
-        true3.setFont(SmallFont);
-        false3.setFont(SmallFont);
-        question4.setFont(SmallFont);
-        name.setFont(SmallFont);
-        submit.setFont(SmallFont);
-        scoreLabel.setFont(Dfont);
-            //locations
+            /**fonts*/
+        true1.setFont(fntAerialSmall);
+        false1.setFont(fntAerialSmall);
+        true2.setFont(fntAerialSmall);
+        false2.setFont(fntAerialSmall);
+        true3.setFont(fntAerialSmall);
+        false3.setFont(fntAerialSmall);
+        question4.setFont(fntAerialSmall);
+        name.setFont(fntAerialSmall);
+        submit.setFont(fntAerialSmall);
+        scoreLabel.setFont(fntAerialLarge);
+            /**locations*/
         true1.setLocation(60,90);
         false1.setLocation(260,90);
         true2.setLocation(60,180);
@@ -274,8 +293,8 @@ public class Newton2ndLaw implements ActionListener, ChangeListener{
         question4.setLocation(60,420);
         name.setLocation(120,472);
         submit.setLocation(825,472);
-        scoreLabel.setLocation(800,60);
-            //color
+        scoreLabel.setLocation(350,460);
+            /**color*/
         true1.setBackground(Color.WHITE);
         false1.setBackground(Color.WHITE);
         true2.setBackground(Color.WHITE);
@@ -284,7 +303,7 @@ public class Newton2ndLaw implements ActionListener, ChangeListener{
         false3.setBackground(Color.WHITE);
         submit.setBackground(Color.WHITE);
         scoreLabel.setBackground(Color.BLACK);
-            //adding listenners
+            /**adding Listeners*/
         true1.addActionListener(this);
         false1.addActionListener(this);
         true2.addActionListener(this);
@@ -292,7 +311,7 @@ public class Newton2ndLaw implements ActionListener, ChangeListener{
         true3.addActionListener(this);
         false3.addActionListener(this);
         submit.addActionListener(this);
-            //adding to panel
+             /**add to the test panel*/
         thetest.add(true1);
         thetest.add(false1);
         thetest.add(true2);
@@ -303,7 +322,7 @@ public class Newton2ndLaw implements ActionListener, ChangeListener{
         thetest.add(name);
         thetest.add(submit);
         thetest.add(scoreLabel);
-
+         /**sets default frame, packs the pane and forces theFrame to be unsizeable, exit on close and visible*/
         theframe.setContentPane(thehome);
 		theframe.pack();
         theframe.setResizable(false);
@@ -311,37 +330,32 @@ public class Newton2ndLaw implements ActionListener, ChangeListener{
 		theframe.setVisible(true);
     }
     
-    //Main Method
+     /**Main Method*/
     public static void main(String[] args){
         new Newton2ndLaw();
     }
 
-    //Acceleration Method
+    /**Acceleration Calculation Method*/
     public static int acceleration(double dblForce,double dblMass,double dblTime){
         double dblDisplacement;
         int intDisplacement = 0;
-        double dblT, dblA;
-        //D = 300, v1=0, a= f/m, t=?; 
+        double dblA;
+        /**Distance Equation based off of: D = ?, v1=0, a= f/m, t=dblTime 
+        d=at^2/2*/ 
         
         dblA = dblForce/dblMass;
-
-        //d=at^2/2
-        //2(d-v1t)/a
-        dblT = Math.round(Math.sqrt(50/dblA)*10000.0)/10000.0;
-        System.out.println(dblT);
-
         dblDisplacement = (dblA*Math.pow(dblTime,2))/2;
         intDisplacement = (int) Math.round(dblDisplacement);
         return intDisplacement;
     }
+    /**Time Calculation Method*/
     public static double time(double dblForce,double dblMass){
         double dblT, dblA;
-        //D = 300, v1=0, a= f/m, t=?; 
-        
-        dblA = dblForce/dblMass;
+        /**Time Equation based off of: D = 25, v1=0, a= f/m, t=?; 
+        d = v1t - at^2/2
+        t = sqrt(2d/a)*/
 
-        //d=at^2/2
-        //2(d-v1t)/a
+        dblA = dblForce/dblMass;
         dblT = Math.round(Math.sqrt(50/dblA)*10000.0)/10000.0;
         return dblT;
     }

@@ -5,15 +5,15 @@ import javax.imageio.*;
 import java.awt.image.*;
 
 public class homepanel extends JPanel{
-    //Properties
+    /**properties*/
     BufferedImage imgHome = null;
-
-    //Methods
+    /**methods*/
     public void paintComponent(Graphics g){
         super.paintComponent(g);
-        //background
+        /**draws background*/
         g.drawImage(imgHome,0,0,null);
     }
+    /**gets image from jar file, if not found, uses from local file*/
     public BufferedImage loadImage(String strFileName){
         InputStream imageclass = null;
         imageclass = this.getClass().getResourceAsStream(strFileName);
@@ -35,7 +35,7 @@ public class homepanel extends JPanel{
             return null;
         }
     }
-    //Constructor
+    /**constructor*/
     public homepanel(){
         super();
         imgHome = loadImage("home.png");

@@ -5,18 +5,19 @@ import javax.imageio.*;
 import java.awt.image.*;
 
 public class simulatorpanel extends JPanel{
-    //Properties
+    /**properties*/
     BufferedImage imgBox = null;
     int intX=-300;
-
-    //Methods
+    /**methods*/
     public void paintComponent(Graphics g){
         super.paintComponent(g);
-        //background
+        /**draws background*/
         g.setColor(Color.WHITE);
         g.fillRect(0,0, 960, 540);
+        /**draws box at position intX which is calculated using the acceleration method*/
         g.drawImage(imgBox,intX,100,null);
     }
+    /**gets image from jar file, if not found, uses from local file*/
     public BufferedImage loadImage(String strFileName){
         InputStream imageclass = null;
         imageclass = this.getClass().getResourceAsStream(strFileName);
@@ -38,7 +39,7 @@ public class simulatorpanel extends JPanel{
             return null;
         }
     }
-    //Constructor
+    /**constructor*/
     public simulatorpanel(){
         super();
         imgBox = loadImage("box.png");
